@@ -6,16 +6,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-IsRegisterVisible = false;
+registerMode = false;
   constructor() { }
 
   ngOnInit() {
   }
 
-  UpdateRegisterVisiblevariable() {
-    console.log('updated');
-    console.log(this.IsRegisterVisible);
-    this.IsRegisterVisible = true;
+  UpdateRegisterMode() {
+    this.registerMode = !this.registerMode;
   }
 
 }
