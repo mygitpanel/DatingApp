@@ -47,6 +47,7 @@ namespace DatingApp.Api.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login(UserLoginDTO userLoginDTO)
         {
+            // throw new Exception("Computer says No");
             var user = await _repository.Login(userLoginDTO.Username, userLoginDTO.Password);
 
             if (user == null)
