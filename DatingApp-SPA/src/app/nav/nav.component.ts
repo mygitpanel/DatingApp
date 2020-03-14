@@ -10,7 +10,7 @@ import { AlertifyService } from '../_services/alertify.service';
 export class NavComponent implements OnInit {
 
   model: any = {};
-  constructor(private service: AuthService, private alertify: AlertifyService) { }
+  constructor(public service: AuthService, private alertify: AlertifyService) { }
 
   ngOnInit() {
   }
@@ -26,8 +26,9 @@ export class NavComponent implements OnInit {
   }
 
   LoggedIn() {
-    const token = localStorage.getItem('token');
-    return !!token; // return true or false. it's a shorthand syntax of bool.
+    return this.service.loggedIn();  // function called on HTML to show user name and othe rthings
+    // const token = localStorage.getItem('token');
+    // return !!token; // return true or false. it's a shorthand syntax of bool.
   }
 
   logout() {

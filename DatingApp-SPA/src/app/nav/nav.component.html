@@ -19,7 +19,7 @@
     </ul>
     <div *ngIf="LoggedIn()" class="dropdown">
       <a class="dropdown-toggle text-light">
-        Welcome User
+        Welcome {{service.decryptToken.unique_name | titlecase}}
       </a>
       <div class="dropdown-menu">
         <a class="dropdown-item" href="#"><i class="fa fa-user"></i>Edit Profile</a>
