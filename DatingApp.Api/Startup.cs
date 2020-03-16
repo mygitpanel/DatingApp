@@ -40,7 +40,7 @@ namespace DatingApp.Api
             services.AddControllers();
             services.AddCors();
             services.AddScoped<IAuthRepository, AuthRepository>(); // Injected Repository Services here
-
+            services.AddScoped<IDatingRepository, DatingRepository>();
             // Authentication Scheme Definition starts here
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
              .AddJwtBearer(options => {
