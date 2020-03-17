@@ -45,8 +45,8 @@ namespace DatingApp.Api
                 opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
             });
             services.AddCors();
-            services.AddScoped<IAuthRepository, AuthRepository>(); // Injected Repository Services here
             services.AddScoped<IDatingRepository, DatingRepository>();
+            services.AddScoped<IAuthRepository, AuthRepository>(); // Injected Repository Services here
             // Authentication Scheme Definition starts here
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
              .AddJwtBearer(options => {

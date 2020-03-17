@@ -11,8 +11,8 @@ namespace DatingApp.Api.Controllers
     [Authorize]
     public class UserController : ControllerBase
     {
-        private readonly DatingRepository _repo;
-        public UserController(DatingRepository repo)
+        private readonly IDatingRepository _repo;
+        public UserController(IDatingRepository repo)
         {
             this._repo = repo;
 
@@ -20,12 +20,12 @@ namespace DatingApp.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> Getusers(){
             var users = await _repo.GetUsers();
-            return Ok();
+            return Ok(users);
         }
         [HttpGet("{id}")]
         public async Task<IActionResult> Getuser(int id){
             var user = await _repo.GetUser(id);
-            return Ok();
+            return Ok(user);
         }
     }
 }
