@@ -25,10 +25,10 @@ namespace DatingApp.Api.Data
 
         public async Task<User> GetUser(int id)
         {
-            var user = await _context.users.Include(p => p.Photo).SingleOrDefaultAsync(u => u.Id == id);
+            var user = await _context.users.Include(p => p.Photo).FirstOrDefaultAsync(u => u.Id == id);
             return user;
         }
-
+ 
         public async Task<IEnumerable<User>> GetUsers()
         {
             var users = await _context.users.Include(p => p.Photo).ToListAsync();

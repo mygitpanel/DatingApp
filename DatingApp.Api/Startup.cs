@@ -37,7 +37,13 @@ namespace DatingApp.Api
         {
             services.AddDbContext<DataContext>(x => x.UseSqlite
             (Configuration.GetConnectionString("DefaultConnection")));
-            services.AddControllers();
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+           
+            // services.AddControllers();
+            // we update this because we add reference for Newtonsoft in csproj file.
+            services.AddControllers().AddNewtonsoftJson(opt => {
+                opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+            });
             services.AddCors();
             services.AddScoped<IAuthRepository, AuthRepository>(); // Injected Repository Services here
             services.AddScoped<IDatingRepository, DatingRepository>();
@@ -80,7 +86,7 @@ namespace DatingApp.Api
             //app.UseHttpsRedirection();
             app.UseAuthentication();   // For Authorize attributes and other user authentication attributes
             app.UseRouting();
-
+            //app.UseMvc();
             app.UseAuthorization();
 
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
