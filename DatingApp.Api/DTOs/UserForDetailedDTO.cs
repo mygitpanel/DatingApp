@@ -6,7 +6,6 @@ namespace DatingApp.Api.DTOs
 {
     public class UserForDetailedDTO
     {
-        
         public int Id { get; set; }
         public string username{get;set;}
         public string Gender { get; set; }
