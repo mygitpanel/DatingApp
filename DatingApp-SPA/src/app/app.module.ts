@@ -15,7 +15,9 @@ import { ErrorInterceptorProvider } from './_services/error.interceptor';
 import { ListComponent } from './list/list.component';
 import { MemberlistComponent } from './memberlist/memberlist.component';
 import { MessagesComponent } from './messages/messages.component';
+import {MemberCardComponent} from './member-card/member-card.component';
 import { appRoutes } from './routes';
+import { UserService } from './_services/user.service';
 
 @NgModule({
    declarations: [
@@ -25,7 +27,8 @@ import { appRoutes } from './routes';
       RegisterComponent,
       ListComponent,
       MemberlistComponent,
-      MessagesComponent
+      MessagesComponent,
+      MemberCardComponent
    ],
    imports: [
       BrowserModule,
@@ -37,6 +40,7 @@ import { appRoutes } from './routes';
    ],
    providers: [
       AuthService,
+      UserService,
       ErrorInterceptorProvider
    ],
    bootstrap: [
