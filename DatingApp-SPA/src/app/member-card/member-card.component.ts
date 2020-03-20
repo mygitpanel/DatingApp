@@ -7,11 +7,11 @@ import { Iuser } from '../_Interfaces/Iuser';
   styleUrls: ['./member-card.component.css']
 })
 export class MemberCardComponent implements OnInit {
-@Input() usersList: Iuser[];
+@Input() usersList: Iuser;
   constructor() { }
 
   ngOnInit() {
-    console.log(this.usersList);
+    // console.log(this.usersList);
   }
 
 }

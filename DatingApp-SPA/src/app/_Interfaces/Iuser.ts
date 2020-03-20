@@ -3,16 +3,16 @@ import { IPhoto } from './IPhoto';
 export interface Iuser {
     Id: number;
     username: string;
-    Gender: string;
-    Age: number;
-    KnownAs: string;
-    Created: Date;
-    LastActive: Date;
-    Introduction?: string;
-    LookingFor?: string;
-    Interests?: string;
-    City: string;
-    Country: string;
-    PhotoUrl: string;
-    Photo?: IPhoto[];
+    gender: string;
+    age: number;
+    knownAs: string;
+    created: Date;
+    lastActive: Date;
+    introduction?: string;
+    lookingFor?: string;
+    interests?: string;
+    city: string;
+    country: string;
+    photoUrl: string;
+    photo?: IPhoto[];
 }
