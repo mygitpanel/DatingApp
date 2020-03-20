@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Iuser } from '../_Interfaces/Iuser';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-member-card',
@@ -8,10 +9,15 @@ import { Iuser } from '../_Interfaces/Iuser';
 })
 export class MemberCardComponent implements OnInit {
 @Input() usersList: Iuser;
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
     // console.log(this.usersList);
   }
+
+  // userDetails(id: number) {
+  //   console.log(id);
+  //   this.router.navigate(['memberlist/', id]);
+  // }
 
 }

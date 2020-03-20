@@ -1,7 +1,7 @@
 import { IPhoto } from './IPhoto';
 
 export interface Iuser {
-    Id: number;
+    id: number;
     username: string;
     gender: string;
     age: number;

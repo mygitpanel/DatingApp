@@ -9,19 +9,14 @@ import { Observable } from 'rxjs';
 })
 export class UserService {
   apiUrl = environment.apiUrl + 'User/';
-   httpOptions = {
-    headers: new HttpHeaders({
-      Authorization : 'Bearer ' + localStorage.getItem('token')
-    })
-  };
 
 constructor(private http: HttpClient) { }
 
 getUsers(): Observable<Iuser[]> {
-  return this.http.get<Iuser[]>(this.apiUrl + 'getusers', this.httpOptions);
+  return this.http.get<Iuser[]>(this.apiUrl + 'getusers');
  }
 
-getSpecificUser(): Observable<Iuser> {
-  return this.http.get<Iuser>(this.apiUrl + 'Getuser', this.httpOptions);
+getSpecificUser(id: number): Observable<Iuser> {
+  return this.http.get<Iuser>(this.apiUrl + 'getuser/' + id);
  }
 }
