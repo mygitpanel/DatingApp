@@ -1,0 +1,89 @@
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-sm-4">
+<h2>Your Profile</h2>
+    </div>
+    <div class="col-sm-8">
+  <div class="alert-info" *ngIf="memberEditForm.dirty">
+  <alert type="info">
+    <strong>Information:</strong>  You have made changes. Any unsaved changes will be lost!
+  </alert>
+  </div>
+    </div>
+  </div>
+</div>
+
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="card">
+        <img
+          src="{{ user.photoUrl }}"
+          alt="{{ user.knownAs }}"
+          class="card-img-top img-thumbnail"
+        />
+        <div class="card-body">
+          <div>
+            <strong>Location:</strong>
+            <p>{{ user.city }}, {{ user.country }}</p>
+          </div>
+          <div>
+            <strong>Age:</strong>
+            <p>{{ user.age }}</p>
+          </div>
+          <div>
+            <strong>Last Active:</strong>
+            <p>{{ user.lastActive }}</p>
+          </div>
+          <div>
+            <strong>Member Since:</strong>
+            <p>{{ user.created }}</p>
+          </div>
+        </div>
+        <div class="card-footer">
+          <div class="btn-group d-flex">
+            <button [disabled]="!memberEditForm.dirty" form="userUpdateForm" class="btn btn-success w-100">Save Changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-8">
+      <div class="tab-panel">
+        <div class="member-tabset">
+          <tabset class="member-tabset">
+            <form id='userUpdateForm' #memberEditForm='ngForm' (ngSubmit)='updateUser()'>
+              <tab heading="About {{ user.knownAs }}">
+                <h4>Location Details</h4>
+                <div class="form-inline">
+                  <label for="city">City</label>
+                  <input type="text" name="city" [(ngModel)]="user.city" />
+                  <label for="city">Country</label>
+                  <input type="text" name="country" [(ngModel)]="user.country" />
+                </div>
+                <h4>Description</h4>
+                <textarea
+                  name="introduction"
+                  [(ngModel)]="user.introduction"
+                  class="form-control"
+                  rows="7"
+                ></textarea>
+                <h4>Looking For</h4>
+                <textarea
+                  name="lookingFor"
+                  [(ngModel)]="user.lookingFor"
+                  class="form-control"
+                  rows="7"
+                ></textarea>
+              </tab>
+            </form>
+
+            <tab heading="Photos">
+              <!-- <ngx-gallery [options]="galleryOptions" [images]="galleryImages" class="ngx-gallery" class="ngx-gallery"></ngx-gallery> -->
+            </tab>
+          </tabset>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

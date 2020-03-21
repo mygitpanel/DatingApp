@@ -10,14 +10,14 @@ import { catchError } from 'rxjs/operators';
 export class MemberDetailsResolver implements Resolve<Iuser> {
     constructor(private router: Router, private service: UserService, private alertify: AlertifyService) {}
     resolve(route: ActivatedRouteSnapshot): Observable<Iuser> {
-        const id = route.params.id;
+        const id = route.params['id'];
         return this.service.getSpecificUser(id).pipe(
             catchError(error => {
                 this.alertify.error('Problem retrieving data');
                 this.router.navigate(['/memberlist']);
                 return of(null);
             })
-        )
+        );
     }
 
 }

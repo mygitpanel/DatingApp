@@ -8,6 +8,7 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
 import { RouterModule } from '@angular/router';
 import { JwtModule } from '@auth0/angular-jwt';
 import { NgxGalleryModule } from '@kolkov/ngx-gallery';
+import { AlertModule } from 'ngx-bootstrap/alert';
 
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
@@ -24,6 +25,9 @@ import { appRoutes } from './routes';
 import { UserService } from './_services/user.service';
 import { MemberDetailsResolver } from './_resolver/memberdetails-resolver';
 import { MemberListResolver } from './_resolver/memberlist-resolver';
+import { MemberEditComponent } from './memberlist/member-edit/member-edit.component';
+import { MemberEditResolver } from './_resolver/memberedit-resolver';
+import { MemberEditCanDeactivateGuard } from './_guard/MemberEditCanDeactivateGuard';
 
 export function tokenGetter() {   // https://github.com/auth0/angular2-jwt    [Get this code from here]
    return localStorage.getItem('token');
@@ -39,7 +43,8 @@ export function tokenGetter() {   // https://github.com/auth0/angular2-jwt    [G
       MemberlistComponent,
       MessagesComponent,
       MemberCardComponent,
-      MemberdetailsComponent
+      MemberdetailsComponent,
+      MemberEditComponent
    ],
    imports: [
       BrowserModule,
@@ -49,6 +54,7 @@ export function tokenGetter() {   // https://github.com/auth0/angular2-jwt    [G
       BsDropdownModule.forRoot(),
       RouterModule.forRoot(appRoutes),
       TabsModule.forRoot(),
+      AlertModule.forRoot(),
       // tslint:disable-next-line: max-line-length
       NgxGalleryModule, // for ngx-gallery i angular 9 use this link https://github.com/kolkov/ngx-gallery. there are different ways for angular 8+ and before 8 version.
       JwtModule.forRoot({
@@ -64,7 +70,9 @@ export function tokenGetter() {   // https://github.com/auth0/angular2-jwt    [G
       UserService,
       ErrorInterceptorProvider,
       MemberDetailsResolver,
-      MemberListResolver
+      MemberListResolver,
+      MemberEditResolver,
+      MemberEditCanDeactivateGuard
    ],
    bootstrap: [
       AppComponent

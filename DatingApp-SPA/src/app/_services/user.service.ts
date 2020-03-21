@@ -19,4 +19,8 @@ getUsers(): Observable<Iuser[]> {
 getSpecificUser(id: number): Observable<Iuser> {
   return this.http.get<Iuser>(this.apiUrl + 'getuser/' + id);
  }
+
+ updateUsers(id: number, user: Iuser) {
+return this.http.put(this.apiUrl + 'updateUser/' + id, user);
+ }
 }
