@@ -51,8 +51,8 @@
     <div class="col-sm-8">
       <div class="tab-panel">
         <div class="member-tabset">
+          <form id='userUpdateForm' #memberEditForm='ngForm' (ngSubmit)='updateUser()'>
           <tabset class="member-tabset">
-            <form id='userUpdateForm' #memberEditForm='ngForm' (ngSubmit)='updateUser()'>
               <tab heading="About {{ user.knownAs }}">
                 <h4>Location Details</h4>
                 <div class="form-inline">
@@ -76,12 +76,12 @@
                   rows="7"
                 ></textarea>
               </tab>
-            </form>
-
-            <tab heading="Photos">
-              <!-- <ngx-gallery [options]="galleryOptions" [images]="galleryImages" class="ngx-gallery" class="ngx-gallery"></ngx-gallery> -->
+          
+            <tab heading="Edit Photos">
+              <app-photo-editor [photos]="user.photo"></app-photo-editor>
             </tab>
-          </tabset>
+          </tabset>  
+        </form>
         </div>
       </div>
     </div>

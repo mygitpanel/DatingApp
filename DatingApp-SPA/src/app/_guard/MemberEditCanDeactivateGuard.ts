@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import { CanDeactivate } from '@angular/router';
 import { MemberEditComponent } from '../memberlist/member-edit/member-edit.component';
-import { Observable } from 'rxjs';
 
 @Injectable()
 export class MemberEditCanDeactivateGuard implements CanDeactivate<MemberEditComponent> {

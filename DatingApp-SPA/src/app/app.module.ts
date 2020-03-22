@@ -28,6 +28,7 @@ import { MemberListResolver } from './_resolver/memberlist-resolver';
 import { MemberEditComponent } from './memberlist/member-edit/member-edit.component';
 import { MemberEditResolver } from './_resolver/memberedit-resolver';
 import { MemberEditCanDeactivateGuard } from './_guard/MemberEditCanDeactivateGuard';
+import {PhotoEditorComponent} from '../app/photo-editor/photo-editor.component';
 
 export function tokenGetter() {   // https://github.com/auth0/angular2-jwt    [Get this code from here]
    return localStorage.getItem('token');
@@ -44,7 +45,8 @@ export function tokenGetter() {   // https://github.com/auth0/angular2-jwt    [G
       MessagesComponent,
       MemberCardComponent,
       MemberdetailsComponent,
-      MemberEditComponent
+      MemberEditComponent,
+      PhotoEditorComponent
    ],
    imports: [
       BrowserModule,
