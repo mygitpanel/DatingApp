@@ -5,6 +5,7 @@ import { NgForm } from '@angular/forms';
 import { AlertifyService } from 'src/app/_services/alertify.service';
 import { UserService } from 'src/app/_services/user.service';
 import { AuthService } from 'src/app/_services/auth.service';
+import { IPhoto } from 'src/app/_Interfaces/IPhoto';
 
 @Component({
   selector: 'app-member-edit',
@@ -38,6 +39,10 @@ unloadNotification($event: any) {
     }, error => {
       this.alertify.error('Server Error');
     });
+  }
+
+  updateUserMainPhoto(photoUrl) {
+    this.user.photoUrl = photoUrl;
   }
 
 }

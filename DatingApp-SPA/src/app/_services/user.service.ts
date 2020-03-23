@@ -23,4 +23,8 @@ getSpecificUser(id: number): Observable<Iuser> {
  updateUsers(id: number, user: Iuser) {
 return this.http.put(this.apiUrl + 'updateUser/' + id, user);
  }
+
+ setMainPhoto(userId: number, photoId: number) {
+   return this.http.post(this.apiUrl + userId + '/photo/' + photoId + '/setMainPhoto', {});
+ }
 }

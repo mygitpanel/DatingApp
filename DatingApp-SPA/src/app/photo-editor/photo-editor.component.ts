@@ -1,8 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { IPhoto } from '../_Interfaces/IPhoto';
 import { FileUploader } from 'ng2-file-upload';
 import { environment } from 'src/environments/environment';
 import { AuthService } from '../_services/auth.service';
+import { UserService } from '../_services/user.service';
+import { AlertifyService } from '../_services/alertify.service';
 
 @Component({
   selector: 'app-photo-editor',
@@ -10,15 +12,17 @@ import { AuthService } from '../_services/auth.service';
   styleUrls: ['./photo-editor.component.css']
 })
 export class PhotoEditorComponent implements OnInit {
+  @Input() photos: IPhoto[];
+  @Output() userMainphoto = new EventEmitter<string>();
+
   uploader: FileUploader;
   hasBaseDropZoneOver = false;
   hasAnotherDropZoneOver = false;
   response: string;
   baseUrl = environment.apiUrl;
+  curretnMainphoto: IPhoto;
 
-  @Input() photos: IPhoto[];
-
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private userService: UserService, private alertify: AlertifyService) { }
 
   ngOnInit() {
     this.initializeUploader();
@@ -54,6 +58,20 @@ export class PhotoEditorComponent implements OnInit {
         this.photos.push(photo);
       }
     };
+}
+
+setMainPhoto(photo: IPhoto) {
+const userId = this.authService.decryptToken.nameid;
+this.userService.setMainPhoto(userId, photo.id).subscribe(next => {
+  this.alertify.success('Main photo Updated');
+  this.curretnMainphoto =  this.photos.filter(p => p.isMain === true)[0];
+  this.curretnMainphoto.isMain = false;
+  photo.isMain = true;
+  this.userMainphoto.emit(photo.url);    //  Emit to Member edit component and get PhotoURL to update main photo on html;
+  console.log(photo.url);
+}, error => {
+  this.alertify.error('Problem with the services');
+});
 }
 }
 

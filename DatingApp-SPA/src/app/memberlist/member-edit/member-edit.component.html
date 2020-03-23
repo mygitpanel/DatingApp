@@ -78,7 +78,8 @@
               </tab>
           
             <tab heading="Edit Photos">
-              <app-photo-editor [photos]="user.photo"></app-photo-editor>
+              <app-photo-editor [photos]="user.photo"  
+              (userMainphoto)="updateUserMainPhoto($event)"></app-photo-editor>
             </tab>
           </tabset>  
         </form>
