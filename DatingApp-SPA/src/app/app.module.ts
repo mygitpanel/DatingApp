@@ -29,6 +29,7 @@ import { MemberEditComponent } from './memberlist/member-edit/member-edit.compon
 import { MemberEditResolver } from './_resolver/memberedit-resolver';
 import { MemberEditCanDeactivateGuard } from './_guard/MemberEditCanDeactivateGuard';
 import {PhotoEditorComponent} from '../app/photo-editor/photo-editor.component';
+import { FileUploadModule } from 'ng2-file-upload';
 
 export function tokenGetter() {   // https://github.com/auth0/angular2-jwt    [Get this code from here]
    return localStorage.getItem('token');
@@ -57,6 +58,7 @@ export function tokenGetter() {   // https://github.com/auth0/angular2-jwt    [G
       RouterModule.forRoot(appRoutes),
       TabsModule.forRoot(),
       AlertModule.forRoot(),
+      FileUploadModule,
       // tslint:disable-next-line: max-line-length
       NgxGalleryModule, // for ngx-gallery i angular 9 use this link https://github.com/kolkov/ngx-gallery. there are different ways for angular 8+ and before 8 version.
       JwtModule.forRoot({
