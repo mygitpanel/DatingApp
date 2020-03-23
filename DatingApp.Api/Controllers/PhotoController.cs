@@ -81,7 +81,7 @@ namespace DatingApp.Api.Controllers
             var photo = _mapper.Map<Photo>(photoCreationDTO);  // photoCreationDTO is the object of PhotoCreationDTO class;
 
             if(userFromRepo.Photo.Any(u => u.IsMain))
-            photo.IsMain = true;
+            photo.IsMain = false;
 
             userFromRepo.Photo.Add(photo);
 
@@ -94,6 +94,35 @@ namespace DatingApp.Api.Controllers
             return BadRequest("Could not add photo");
         }
 
+        [HttpPost("{photoId}/setMainPhoto")]
+        public async Task<IActionResult> setMainPhoto(int userId, int photoId){
+            var currentUser = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+
+            if(userId != currentUser)
+                return Unauthorized();
+            
+            var getuser = await _repo.GetUser(userId);
+
+            if(!getuser.Photo.Any(p => p.Id == photoId))       // Check that getUser contains photo with the photoId or not; 
+                return Unauthorized();
+
+            var getPhoto = await _repo.GetPhoto(photoId);
+
+            if(getPhoto.IsMain)
+                return BadRequest("This is already the main photo");
+            
+            var currentMainPhoto = await _repo.GetMainPhoto(userId);
+            if(currentMainPhoto!=null)
+                currentMainPhoto.IsMain = false;
+
+            getPhoto.IsMain= true;
+            
+            if(await _repo.SaveAll())
+                return NoContent();
+            
+            return BadRequest("Could not set photo to main");
+            
+        }
 
     }
 }
