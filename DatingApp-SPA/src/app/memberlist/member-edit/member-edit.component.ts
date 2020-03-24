@@ -15,6 +15,8 @@ import { IPhoto } from 'src/app/_Interfaces/IPhoto';
 export class MemberEditComponent implements OnInit {
   @ViewChild('memberEditForm') editForm: NgForm;
 user: Iuser;
+photoUrl: string;
+
 @HostListener('window: beforeunload', ['$event'])
 unloadNotification($event: any) {
   if (this.editForm.dirty) {
@@ -29,6 +31,7 @@ unloadNotification($event: any) {
     this.user = data['userEdit'];
     console.log(this.user);
     });
+    this.authService.currentPhotoUrl.subscribe(photoUrl => this.photoUrl = photoUrl);
   }
 
   updateUser() {

@@ -3,6 +3,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using DatingApp.Api.Controllers.Models;
 using DatingApp.Api.Controllers.Models.Data;
 using DatingApp.Api.DTOs;
@@ -20,10 +21,12 @@ namespace DatingApp.Api.Controllers
     {
         private readonly IAuthRepository _repository;
         private readonly IConfiguration _config;
-        public AuthController(IAuthRepository repository, IConfiguration config)
+        private readonly IMapper _mapper;
+        public AuthController(IAuthRepository repository, IConfiguration config, IMapper mapper)
         {
+            _mapper = mapper;
             _config = config;
-            this._repository = repository;
+            _repository = repository;
         }
         [HttpPost("register")]
         public async Task<IActionResult> Register(UserRegiserDTO userregister)
@@ -47,7 +50,7 @@ namespace DatingApp.Api.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login(UserLoginDTO userLoginDTO)
         {
-           // throw new Exception("Computer says No");
+            // throw new Exception("Computer says No");
             var user = await _repository.Login(userLoginDTO.Username.ToLower(), userLoginDTO.Password);
 
             if (user == null)
@@ -73,9 +76,12 @@ namespace DatingApp.Api.Controllers
             var tokenHandler = new JwtSecurityTokenHandler();
 
             var token = tokenHandler.CreateToken(tokenDescriptor);
+            var userData = _mapper.Map<UserListDTO>(user);
 
-            return Ok(new {
-                token = tokenHandler.WriteToken(token)
+            return Ok(new
+            {
+                token = tokenHandler.WriteToken(token),
+                userData
             });
         }
     }

@@ -67,8 +67,10 @@ this.userService.setMainPhoto(userId, photo.id).subscribe(next => {
   this.curretnMainphoto =  this.photos.filter(p => p.isMain === true)[0];
   this.curretnMainphoto.isMain = false;
   photo.isMain = true;
-  this.userMainphoto.emit(photo.url);    //  Emit to Member edit component and get PhotoURL to update main photo on html;
-  console.log(photo.url);
+  // this.userMainphoto.emit(photo.url);    //  Emit to Member edit component and get PhotoURL to update main photo on html;
+  this.authService.ChangeMemberPhoto(photo.url);
+  this.authService.currentUser.photoUrl = photo.url;
+  localStorage.setItem('userData', JSON.stringify(this.authService.currentUser));
 }, error => {
   this.alertify.error('Problem with the services');
 });
