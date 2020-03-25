@@ -3,6 +3,7 @@ import { environment } from 'src/environments/environment';
 import { HttpClient, HttpHeaderResponse, HttpHeaders } from '@angular/common/http';
 import { Iuser } from '../_Interfaces/Iuser';
 import { Observable } from 'rxjs';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ import { Observable } from 'rxjs';
 export class UserService {
   apiUrl = environment.apiUrl + 'User/';
 
-constructor(private http: HttpClient) { }
+constructor(private http: HttpClient, private service: AuthService) { }
 
 getUsers(): Observable<Iuser[]> {
   return this.http.get<Iuser[]>(this.apiUrl + 'getusers');
@@ -26,5 +27,9 @@ return this.http.put(this.apiUrl + 'updateUser/' + id, user);
 
  setMainPhoto(userId: number, photoId: number) {
    return this.http.post(this.apiUrl + userId + '/photo/' + photoId + '/setMainPhoto', {});
+ }
+
+ DeletePhoto(userId: number, photoId: number) {
+  return this.http.delete(this.apiUrl + userId + '/photo/' + photoId);
  }
 }
