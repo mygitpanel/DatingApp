@@ -17,12 +17,23 @@ registerForm: FormGroup;
   constructor(private service: AuthService, private alertify: AlertifyService, private fb: FormBuilder) { }
 
   ngOnInit() {
+    this.CreateRegisterForm();
+    // this.registerForm = new FormGroup({
+    //   username: new FormControl('', Validators.required),
+    //   password: new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(8)]),
+    //   confirmPassword: new FormControl('', Validators.required)
+    // }, this.passwordMatchValidator);
   }
 
   CreateRegisterForm() {
     this.registerForm = this.fb.group({
+      gender: ['male'],
       username: ['', Validators.required],
-      password: ['', Validators.required, Validators.minLength(4), Validators.maxLength(8)],
+      knownAs: ['', Validators.required],
+      dateOfBirth: [null, Validators.required],
+      city: ['', Validators.required],
+      country: ['', Validators.required],
+      password: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(8)]],
       confirmPassword: ['', Validators.required]
     }, {validators: this.passwordMatchValidator});
   }
