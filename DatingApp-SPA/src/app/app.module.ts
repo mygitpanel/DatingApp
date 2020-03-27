@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {HttpClientModule} from '@angular/common/http';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BsDropdownModule } from 'ngx-bootstrap';
 import { TabsModule } from 'ngx-bootstrap/tabs';
@@ -59,6 +59,7 @@ export function tokenGetter() {   // https://github.com/auth0/angular2-jwt    [G
       TabsModule.forRoot(),
       AlertModule.forRoot(),
       FileUploadModule,
+      ReactiveFormsModule,
       // tslint:disable-next-line: max-line-length
       NgxGalleryModule, // for ngx-gallery i angular 9 use this link https://github.com/kolkov/ngx-gallery. there are different ways for angular 8+ and before 8 version.
       JwtModule.forRoot({
