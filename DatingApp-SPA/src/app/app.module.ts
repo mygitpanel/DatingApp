@@ -10,6 +10,7 @@ import { RouterModule } from '@angular/router';
 import { JwtModule } from '@auth0/angular-jwt';
 import { NgxGalleryModule } from '@kolkov/ngx-gallery';
 import { AlertModule } from 'ngx-bootstrap/alert';
+import { TimeagoModule } from 'ngx-timeago';
 
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
@@ -20,8 +21,8 @@ import { ErrorInterceptorProvider } from './_services/error.interceptor';
 import { ListComponent } from './list/list.component';
 import { MemberlistComponent } from './memberlist/memberlist.component';
 import { MessagesComponent } from './messages/messages.component';
-import {MemberCardComponent} from './member-card/member-card.component';
-import {MemberdetailsComponent} from './memberlist/memberDetails/memberDetails.component';
+import { MemberCardComponent } from './member-card/member-card.component';
+import { MemberdetailsComponent } from './memberlist/memberDetails/memberDetails.component';
 import { appRoutes } from './routes';
 import { UserService } from './_services/user.service';
 import { MemberDetailsResolver } from './_resolver/memberdetails-resolver';
@@ -48,7 +49,8 @@ export function tokenGetter() {   // https://github.com/auth0/angular2-jwt    [G
       MemberCardComponent,
       MemberdetailsComponent,
       MemberEditComponent,
-      PhotoEditorComponent
+      PhotoEditorComponent,
+      // TimeAgoPipe  not working with angular 9           // https://momentjs.com/  we can use this for time and date functionality
    ],
    imports: [
       BrowserModule,
@@ -62,6 +64,7 @@ export function tokenGetter() {   // https://github.com/auth0/angular2-jwt    [G
       FileUploadModule,
       ReactiveFormsModule,
       BsDatepickerModule.forRoot(),
+      TimeagoModule.forRoot(),
       // tslint:disable-next-line: max-line-length
       NgxGalleryModule, // for ngx-gallery i angular 9 use this link https://github.com/kolkov/ngx-gallery. there are different ways for angular 8+ and before 8 version.
       JwtModule.forRoot({
