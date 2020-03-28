@@ -51,6 +51,7 @@ namespace DatingApp.Api
             services.AddAutoMapper(typeof(DatingRepository).Assembly);
             services.AddScoped<IDatingRepository, DatingRepository>();
             services.AddScoped<IAuthRepository, AuthRepository>(); // Injected Repository Services here
+            services.AddScoped<LogUserActivity>();
 
             // Authentication Scheme Definition starts here
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
