@@ -80,8 +80,12 @@ namespace DatingApp.Api.Controllers
 
             var photo = _mapper.Map<Photo>(photoCreationDTO);  // photoCreationDTO is the object of PhotoCreationDTO class;
 
-            if(userFromRepo.Photo.Any(u => u.IsMain))
+            if(userFromRepo.Photo.Any(u => u.IsMain)){
             photo.IsMain = false;
+            }
+            else {
+            photo.IsMain = true;
+            }
 
             userFromRepo.Photo.Add(photo);
 

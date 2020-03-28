@@ -39,8 +39,8 @@ login(model: any) {
    );
   }
 
-  register(model: any) {
-return this.http.post(this.ApiUrl + 'register', model, {
+  register(user: Iuser) {
+return this.http.post(this.ApiUrl + 'register', user, {
   headers: new HttpHeaders({
     'Content-Type': 'application/json'
   })
