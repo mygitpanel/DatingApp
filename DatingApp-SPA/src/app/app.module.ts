@@ -33,6 +33,7 @@ import { MemberEditResolver } from './_resolver/memberedit-resolver';
 import { MemberEditCanDeactivateGuard } from './_guard/MemberEditCanDeactivateGuard';
 import {PhotoEditorComponent} from '../app/photo-editor/photo-editor.component';
 import { FileUploadModule } from 'ng2-file-upload';
+import { ListResolver } from './_resolver/list-resolver';
 
 export function tokenGetter() {   // https://github.com/auth0/angular2-jwt    [Get this code from here]
    return localStorage.getItem('token');
@@ -85,7 +86,8 @@ export function tokenGetter() {   // https://github.com/auth0/angular2-jwt    [G
       MemberDetailsResolver,
       MemberListResolver,
       MemberEditResolver,
-      MemberEditCanDeactivateGuard
+      MemberEditCanDeactivateGuard,
+      ListResolver
    ],
    bootstrap: [
       AppComponent
