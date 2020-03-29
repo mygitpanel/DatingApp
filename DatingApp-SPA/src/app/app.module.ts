@@ -11,6 +11,7 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { NgxGalleryModule } from '@kolkov/ngx-gallery';
 import { AlertModule } from 'ngx-bootstrap/alert';
 import { TimeagoModule } from 'ngx-timeago';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
 
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
@@ -65,6 +66,7 @@ export function tokenGetter() {   // https://github.com/auth0/angular2-jwt    [G
       ReactiveFormsModule,
       BsDatepickerModule.forRoot(),
       TimeagoModule.forRoot(),
+      PaginationModule.forRoot(),
       // tslint:disable-next-line: max-line-length
       NgxGalleryModule, // for ngx-gallery i angular 9 use this link https://github.com/kolkov/ngx-gallery. there are different ways for angular 8+ and before 8 version.
       JwtModule.forRoot({

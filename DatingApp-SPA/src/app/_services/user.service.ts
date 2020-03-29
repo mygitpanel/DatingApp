@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { HttpClient, HttpHeaderResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaderResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Iuser } from '../_Interfaces/Iuser';
 import { Observable } from 'rxjs';
 import { AuthService } from './auth.service';
+import { PaginatedResult } from '../_Interfaces/IPagination';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +15,26 @@ export class UserService {
 
 constructor(private http: HttpClient, private service: AuthService) { }
 
-getUsers(): Observable<Iuser[]> {
-  return this.http.get<Iuser[]>(this.apiUrl + 'getusers');
+getUsers(page?, itemsPerPage?): Observable<PaginatedResult<Iuser[]>> {
+
+  const paginatedResult: PaginatedResult<Iuser[]> = new PaginatedResult<Iuser[]>(); // PaginatedResult from IPagination
+
+  let params = new HttpParams();
+
+  if (page != null && itemsPerPage != null) {
+    params = params.append('pageNumber', page);
+    params = params.append('pageSize', itemsPerPage);
+  }
+
+  return this.http.get<Iuser[]>(this.apiUrl + 'getusers', {observe: 'response', params}).pipe(
+    map(response => {
+      paginatedResult.result = response.body;
+      if (response.headers.get('Pagination') != null) {
+        paginatedResult.pagination = JSON.parse(response.headers.get('Pagination'));
+      }
+      return paginatedResult;
+    })
+  );
  }
 
 getSpecificUser(id: number): Observable<Iuser> {
