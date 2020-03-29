@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using DatingApp.Api.Controllers.Models;
 using DatingApp.Api.Controllers.Models.Data;
 using DatingApp.Api.Helper;
+using DatingApp.Api.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace DatingApp.Api.Data
@@ -24,6 +25,11 @@ namespace DatingApp.Api.Data
         public void Delete<T>(T entity) where T : class
         {
             _context.Remove(entity);
+        }
+
+        public async Task<Like> GetLikes(int userId, int receipientId)
+        {
+            return await _context.Likes.FirstOrDefaultAsync(u => u.LikerId == userId && u.LikeeId == receipientId);
         }
 
         public async Task<Photo> GetMainPhoto(int userId)
