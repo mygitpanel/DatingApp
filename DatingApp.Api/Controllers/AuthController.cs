@@ -29,6 +29,7 @@ namespace DatingApp.Api.Controllers
             _repository = repository;
         }
         [HttpPost("register")]
+       // http://localhost:5000/api/Auth/register
         public async Task<IActionResult> Register(UserRegiserDTO userregister)
         {
             // if(!ModelState.IsValid)
@@ -47,6 +48,7 @@ namespace DatingApp.Api.Controllers
             return CreatedAtRoute("GetUser", new{Controller = "User", id = CreatedUser.Id}, userToReturn);
         }
         [HttpPost("login")]
+        // http://localhost:5000/api/Auth/login
         public async Task<IActionResult> Login(UserLoginDTO userLoginDTO)
         {
             // throw new Exception("Computer says No");

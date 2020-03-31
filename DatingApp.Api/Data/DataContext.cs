@@ -11,6 +11,7 @@ namespace DatingApp.Api.Controllers.Models.Data
         public DbSet<User> users{get;set;}
         public DbSet<Photo> Photos{get; set;}
         public DbSet<Like> Likes { get; set; }
+        public DbSet<Message> Messages { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder){
             builder.Entity<Like>()
@@ -27,6 +28,16 @@ namespace DatingApp.Api.Controllers.Models.Data
                 .HasOne(u => u.Liker)   // Liker from user class
                 .WithMany(u => u.Likees) // Likees from user class in Icollection
                 .HasForeignKey(u => u.LikerId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<Message>()
+                .HasOne(u => u.Sender)
+                .WithMany(m => m.MessagesSent)
+                .OnDelete(DeleteBehavior.Restrict);
+            
+            builder.Entity<Message>()
+                .HasOne(u => u.Receipient)
+                .WithMany(m => m.MessagesReceived)
                 .OnDelete(DeleteBehavior.Restrict);
         }
     }
