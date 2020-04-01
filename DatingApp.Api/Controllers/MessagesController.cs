@@ -59,7 +59,7 @@ namespace DatingApp.Api.Controllers
             return Ok(messages);
         }
 
-        [HttpGet("thread/{receipientId}")]
+        [HttpGet("thread/{receipientId}")] 
         public async Task<IActionResult> GetMessageThread(int userId, int receipientId)
         {
             var currentUser = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);

@@ -12,6 +12,7 @@ import { NgxGalleryModule } from '@kolkov/ngx-gallery';
 import { AlertModule } from 'ngx-bootstrap/alert';
 import { TimeagoModule } from 'ngx-timeago';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { FileUploadModule } from 'ng2-file-upload';
 
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
@@ -32,8 +33,10 @@ import { MemberEditComponent } from './memberlist/member-edit/member-edit.compon
 import { MemberEditResolver } from './_resolver/memberedit-resolver';
 import { MemberEditCanDeactivateGuard } from './_guard/MemberEditCanDeactivateGuard';
 import {PhotoEditorComponent} from '../app/photo-editor/photo-editor.component';
-import { FileUploadModule } from 'ng2-file-upload';
+import {MemberMessagesComponent} from '../app/member-messages/member-messages.component';
+
 import { ListResolver } from './_resolver/list-resolver';
+import { MessagesResolver } from './_resolver/messages-resolver';
 
 export function tokenGetter() {   // https://github.com/auth0/angular2-jwt    [Get this code from here]
    return localStorage.getItem('token');
@@ -52,6 +55,7 @@ export function tokenGetter() {   // https://github.com/auth0/angular2-jwt    [G
       MemberdetailsComponent,
       MemberEditComponent,
       PhotoEditorComponent,
+      MemberMessagesComponent
       // TimeAgoPipe  not working with angular 9           // https://momentjs.com/  we can use this for time and date functionality
    ],
    imports: [
@@ -87,7 +91,8 @@ export function tokenGetter() {   // https://github.com/auth0/angular2-jwt    [G
       MemberListResolver,
       MemberEditResolver,
       MemberEditCanDeactivateGuard,
-      ListResolver
+      ListResolver,
+      MessagesResolver
    ],
    bootstrap: [
       AppComponent

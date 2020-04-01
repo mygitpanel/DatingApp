@@ -12,6 +12,7 @@ import { MemberEditComponent } from './memberlist/member-edit/member-edit.compon
 import { MemberEditResolver } from './_resolver/memberedit-resolver';
 import { MemberEditCanDeactivateGuard } from './_guard/MemberEditCanDeactivateGuard';
 import { ListResolver } from './_resolver/list-resolver';
+import { MessagesResolver } from './_resolver/messages-resolver';
 
 export const appRoutes: Routes = [
 {path: '', component: HomeComponent},
@@ -21,7 +22,7 @@ export const appRoutes: Routes = [
     {path: 'memberlist/:id', component: MemberdetailsComponent, canActivate: [AuthguardGuard], resolve: {user: MemberDetailsResolver}},
     // tslint:disable-next-line: max-line-length
     {path: 'memberedit/:edit', component: MemberEditComponent, canActivate: [AuthguardGuard], resolve: {userEdit: MemberEditResolver}, canDeactivate: [MemberEditCanDeactivateGuard]},
-    {path: 'messages', component: MessagesComponent}
+    {path: 'messages', component: MessagesComponent, resolve: {messages: MessagesResolver}}
 ]},
 {path: '**', redirectTo: '', pathMatch: 'full'}];
 

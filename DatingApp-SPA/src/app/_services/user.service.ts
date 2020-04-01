@@ -6,6 +6,8 @@ import { Observable } from 'rxjs';
 import { AuthService } from './auth.service';
 import { PaginatedResult } from '../_Interfaces/IPagination';
 import { map } from 'rxjs/operators';
+import { IMessage } from '../_Interfaces/Imessage';
+import { JsonPipe } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
@@ -70,5 +72,31 @@ return this.http.put(this.apiUrl + 'updateUser/' + id, user);
 
  sendLike(userId: number, receipientId: number ) {
   return this.http.post(this.apiUrl + userId + '/like/' + receipientId, {});
+ }
+
+ getMessages(id: number, page?, itemsPerPage?, messageContainer?) {
+   const paginatedResult: PaginatedResult<IMessage[]> = new PaginatedResult<IMessage[]>();
+
+   let params = new HttpParams();
+   params = params.append('MessageContainer', messageContainer);
+
+   if (page != null && itemsPerPage != null) {
+    params = params.append('pageNumber', page);
+    params = params.append('pageSize', itemsPerPage);
+  }
+
+   return this.http.get<IMessage[]>(this.apiUrl + id + '/messages' + '/getmessagelist', {observe: 'response', params}).pipe(
+            map(response => {
+              paginatedResult.result = response.body;
+              if (response.headers.get('Pagination') != null) {
+                paginatedResult.pagination = JSON.parse(response.headers.get('Pagination'));
+              }
+              return paginatedResult;
+            })
+      );
+ }
+
+ getMessageThread(userId: number, receipientId: number) {
+  return this.http.get<IMessage[]>(this.apiUrl + userId + '/messages/thread/' + receipientId);
  }
 }
