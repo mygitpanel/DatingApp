@@ -8,6 +8,7 @@ import { PaginatedResult } from '../_Interfaces/IPagination';
 import { map } from 'rxjs/operators';
 import { IMessage } from '../_Interfaces/Imessage';
 import { JsonPipe } from '@angular/common';
+import { Message } from '@angular/compiler/src/i18n/i18n_ast';
 
 @Injectable({
   providedIn: 'root'
@@ -98,5 +99,9 @@ return this.http.put(this.apiUrl + 'updateUser/' + id, user);
 
  getMessageThread(userId: number, receipientId: number) {
   return this.http.get<IMessage[]>(this.apiUrl + userId + '/messages/thread/' + receipientId);
+ }
+
+ SendMessage(userId: number, message: Message) {
+  return this.http.post(this.apiUrl + userId + '/messages/createmessage', message);
  }
 }

@@ -12,6 +12,7 @@ import { AuthService } from '../_services/auth.service';
 export class MemberMessagesComponent implements OnInit {
 @Input() receipientId: number;
 messages: IMessage[];
+newMessage: any = {};
 
   constructor(private userService: UserService, private authService: AuthService, private alertify: AlertifyService) { }
 
@@ -26,6 +27,16 @@ messages: IMessage[];
         }, error => {
           this.alertify.error('server error');
         });
+  }
+
+  sendMessage() {
+    this.newMessage.receipientId = this.receipientId;
+    this.userService.SendMessage(this.authService.decryptToken.nameid, this.newMessage).subscribe((message: IMessage) => {
+      this.messages.unshift(message);
+      this.newMessage.content = '';
+    }, error => {
+      this.alertify.error('server error');
+    });
   }
 
 }
