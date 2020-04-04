@@ -18,7 +18,7 @@ export class MemberdetailsComponent implements OnInit {
   galleryImages: NgxGalleryImage[];   // NGX gallery code
 user: Iuser;
 
-@ViewChild('memberTabs') memberTabs: TabsetComponent
+@ViewChild('memberTabs', { static: true }) memberTabs: TabsetComponent
 
   constructor(private route: ActivatedRoute, private alertify: AlertifyService, private service: UserService) { }
 
@@ -26,6 +26,13 @@ user: Iuser;
     this.route.data.subscribe(data => {
       this.user = data['user'];
     });
+
+    this.route.queryParams.subscribe(params => {
+      const selectedTab = params['tab'];
+      console.log(selectedTab);
+      this.memberTabs.tabs[selectedTab > 0 ? selectedTab : 0].active = true;
+    })
+
 //  NGX Gallery code starts here-----
     this.galleryOptions = [
       {
