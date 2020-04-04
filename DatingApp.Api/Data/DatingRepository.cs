@@ -151,7 +151,7 @@ namespace DatingApp.Api.Data
                          .Include(u => u.Receipient).ThenInclude(p => p.Photo)
                          .Where(m => m.ReceipientId == userId && m.SenderId == receipientId
                          ||     m.ReceipientId == receipientId && m.SenderId == userId)
-                         .OrderByDescending(m => m.MessageSent)
+                        //  .OrderByDescending(m => m.MessageSent)
                          .ToListAsync();
             
             return messages;
