@@ -104,4 +104,10 @@ return this.http.put(this.apiUrl + 'updateUser/' + id, user);
  SendMessage(userId: number, message: Message) {
   return this.http.post(this.apiUrl + userId + '/messages/createmessage', message);
  }
+
+ deleteMessage(id: number, userId: number) {
+  return this.http.post(this.apiUrl + userId + '/messages/deletemessage/' + id, {});
+ }
+
+
 }

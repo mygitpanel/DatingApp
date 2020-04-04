@@ -44,4 +44,15 @@ messageContainer = 'Unread';
     this.loadMessages();
   }
 
+  deleteMessage(id: number) {
+    this.alertify.confirm('Are you sure you want to delete this message', () => {
+      this.userService.deleteMessage(id, this.authService.decryptToken.nameid).subscribe(() => {
+        this.messages.splice(this.messages.findIndex(m => m.id === id), 1);
+        this.alertify.success('message has been deleted');
+      }, error => {
+        this.alertify.error('problem with delete');
+      });
+    });
+  }
+
 }
