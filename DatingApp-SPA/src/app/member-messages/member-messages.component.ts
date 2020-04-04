@@ -3,6 +3,7 @@ import { IMessage } from '../_Interfaces/Imessage';
 import { UserService } from '../_services/user.service';
 import { AlertifyService } from '../_services/alertify.service';
 import { AuthService } from '../_services/auth.service';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-member-messages',
@@ -21,7 +22,17 @@ newMessage: any = {};
   }
 
   loadMessages() {
+    const currentUserId = +this.authService.decryptToken.nameid;
     this.userService.getMessageThread(this.authService.decryptToken.nameid, this.receipientId)
+    .pipe(
+          tap(messages => {
+              for (let i = 0; i < messages.length; i++) {
+                if (messages[i].isRead === false && messages[i].receipientId === currentUserId) {
+                  this.userService.MarkAsRead(currentUserId, messages[i].id);
+                }
+              }
+          })
+    )
         .subscribe(messages => {
           this.messages = messages;
         }, error => {

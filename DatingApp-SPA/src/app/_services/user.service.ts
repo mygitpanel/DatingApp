@@ -109,5 +109,11 @@ return this.http.put(this.apiUrl + 'updateUser/' + id, user);
   return this.http.post(this.apiUrl + userId + '/messages/deletemessage/' + id, {});
  }
 
+ MarkAsRead(userId: number, messageid: number) {
+   // subscribed here because we are not going to send any information on client or TS file
+  return this.http.post(this.apiUrl + userId + '/messages/' + messageid + '/messageread', {})
+                       .subscribe();
+ }
+
 
 }
