@@ -2,9 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DatingApp.Api.Controllers.Models;
 using DatingApp.Api.Controllers.Models.Data;
 using DatingApp.Api.Data;
+using DatingApp.Api.Models;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -23,8 +26,10 @@ namespace DatingApp.Api
               var services = scope.ServiceProvider;
               try{
                   var context = services.GetRequiredService<DataContext>();
+                  var userManager = services.GetRequiredService<UserManager<User>>();
+                  var roleManager = services.GetRequiredService<RoleManager<Role>>();
                   context.Database.Migrate();
-                  Seed.SeedUser(context);
+                  Seed.SeedUser(userManager, roleManager);
               }
               catch(Exception ex){
                   var logger = services.GetRequiredService<ILogger<Program>>();

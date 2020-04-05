@@ -16,7 +16,7 @@ namespace DatingApp.Api.Controllers
     [ServiceFilter(typeof(LogUserActivity))]  // used for user last active data or time
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class UserController : ControllerBase
     {
         private readonly IDatingRepository _repo;

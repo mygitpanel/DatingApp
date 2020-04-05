@@ -2,15 +2,18 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using DatingApp.Api.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace DatingApp.Api.Controllers.Models
 {
-    public class User
+    public class User : IdentityUser<int>
     {
-        public int Id { get; set; }
-        public string username{get;set;}
-        public byte[] PasswordHash{get;set;}
-        public byte[] PasswordSalt{get;set;}
+
+        // Commented these properties because we are using Identity and it's already contains these properties
+        //public int Id { get; set; }
+        //public string username{get;set;}
+        //public byte[] PasswordHash{get;set;}
+        //public byte[] PasswordSalt{get;set;}
         public string Gender { get; set; }
         public DateTime DateOfBirth { get; set; }
         public string KnownAs { get; set; }
@@ -26,5 +29,7 @@ namespace DatingApp.Api.Controllers.Models
         public ICollection<Like> Likees { get; set; }
         public ICollection<Message> MessagesSent { get; set; }
         public ICollection<Message> MessagesReceived { get; set; }
+        public UserRole MyProperty { get; set; }
+        public ICollection<UserRole> UserRoles { get; set; }
     }
 }

@@ -15,12 +15,14 @@ namespace DatingApp.Api.Data
         }
         public async Task<User> Login(string username, string password)
         {
-            var user = await _Context.users.Include(p => p.Photo).FirstOrDefaultAsync(x => x.username == username);
+            var user = await _Context.Users.Include(p => p.Photo).FirstOrDefaultAsync(x => x.UserName == username);
             if(user==null) 
                 return null;
             
-            if(!VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt))
-                return null;
+            // if(!VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt))
+            //     return null;
+
+
             
             return user;
 
@@ -44,10 +46,10 @@ namespace DatingApp.Api.Data
             byte[] passwordHash, passwordSalt;
             CreatePasswordHashdHash(password, out passwordHash, out passwordSalt);
 
-            user.PasswordHash = passwordHash;
-            user.PasswordSalt = passwordSalt;
+            // user.PasswordHash = passwordHash;
+            // user.PasswordSalt = passwordSalt;
 
-            await _Context.users.AddAsync(user);
+            await _Context.Users.AddAsync(user);
             await _Context.SaveChangesAsync();
 
             return user;
@@ -62,7 +64,7 @@ namespace DatingApp.Api.Data
 
         public async Task<bool> UserExist(string username)
         {
-           if( await _Context.users.AnyAsync(x => x.username == username))
+           if( await _Context.Users.AnyAsync(x => x.UserName == username))
                     return true;
 
              return false;
