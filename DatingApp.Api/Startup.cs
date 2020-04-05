@@ -33,11 +33,33 @@ namespace DatingApp.Api
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
+        
+        public void ConfigureDevelopmentService(IServiceCollection services)
         {
             services.AddDbContext<DataContext>(x => x.UseSqlite
             (Configuration.GetConnectionString("DefaultConnection")));
+
+            ConfigureServices(services);
+        }
+
+          public void ConfigureProductionService(IServiceCollection services)
+        {
+            services.AddDbContext<DataContext>(x => x.UseSqlServer
+            (Configuration.GetConnectionString("DefaultConnection")));
+
+            ConfigureServices(services);
+        }
+
+
+        // This method gets called by the runtime. Use this method to add services to the container.
+        public void ConfigureServices(IServiceCollection services)
+        {
+
+             services.AddDbContext<DataContext>(x => x.UseSqlServer
+            (Configuration.GetConnectionString("DefaultConnection")));
+            
+            // services.AddDbContext<DataContext>(x => x.UseSqlite
+            // (Configuration.GetConnectionString("DefaultConnection")));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
            
             // services.AddControllers();
@@ -98,9 +120,13 @@ namespace DatingApp.Api
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             //app.UseMvc();
 
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapFallbackToController("Index","FallBack");  // Index Action Method and FallBack Controller
             });
         }
     }

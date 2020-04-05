@@ -85,7 +85,7 @@ namespace DatingApp.Api.Controllers
             
             messageForCreationDTO.SenderId = userId;
 
-            var receipient = _repo.GetUser(messageForCreationDTO.ReceipientId);
+            var receipient = await _repo.GetUser(messageForCreationDTO.ReceipientId);
 
             if(receipient == null)
                 return BadRequest("Could not find user");
