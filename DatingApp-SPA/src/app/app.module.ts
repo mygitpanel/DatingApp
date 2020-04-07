@@ -37,6 +37,8 @@ import {MemberMessagesComponent} from '../app/member-messages/member-messages.co
 
 import { ListResolver } from './_resolver/list-resolver';
 import { MessagesResolver } from './_resolver/messages-resolver';
+import { AdminComponent } from './Admin/Admin.component';
+import { HasRoleDirective } from './_Directives/hasRole-directive.directive';
 
 export function tokenGetter() {   // https://github.com/auth0/angular2-jwt    [Get this code from here]
    return localStorage.getItem('token');
@@ -55,7 +57,9 @@ export function tokenGetter() {   // https://github.com/auth0/angular2-jwt    [G
       MemberdetailsComponent,
       MemberEditComponent,
       PhotoEditorComponent,
-      MemberMessagesComponent
+      MemberMessagesComponent,
+      AdminComponent,
+      HasRoleDirective
       // TimeAgoPipe  not working with angular 9           // https://momentjs.com/  we can use this for time and date functionality
    ],
    imports: [

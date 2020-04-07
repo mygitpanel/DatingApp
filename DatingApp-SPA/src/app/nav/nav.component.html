@@ -12,6 +12,9 @@
       <li class="nav-item">
         <a class="nav-link" [routerLink]="['/messages']" routerLinkActive="router-link-active" >Messages</a>
       </li>
+      <li class="nav-item" *appHasRole="['Admin','Moderator']">
+        <a class="nav-link" [routerLink]="['/admin']" routerLinkActive="router-link-active">Admin</a>
+      </li>
     </ul>
     <div *ngIf="LoggedIn()" class="dropdown" dropdown>
       <span class="mr-1">
